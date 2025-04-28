@@ -1,0 +1,6 @@
+<launch>
+    <group ns="new_ns">
+        <node name="receiver" pkg="super_artem_study_pkg" type="listener.py" output="screen"/>
+        <node name="sender" p" type="talker.py" output="screen"/>
+    </group>
+</launch>

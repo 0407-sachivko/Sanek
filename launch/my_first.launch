@@ -1,0 +1,23 @@
+<launch>
+  <arg name="topic_name" default="new_topic"/>
+
+  <group ns="new_ns">
+    <!-- Включение another_one.launch с передачей аргумента -->
+    <include file="$(find dart_veider)/launch/another_one.launch">
+      <arg name="topic_name" value="$(arg topic_name)"/>
+    </include>
+
+    <!-- Запуск узла receiver -->
+    <node name="receiver" pkg="dart_veider" type="listener.py" output="screen">
+      <!-- Мапирование топика my_chat_topic к значению аргумента topic_name -->
+      <remap from="my_chat_topic" to="$(arg topic_name)"/>
+    </node>
+
+    <!-- Запуск узла sender -->
+    <node name="sender" pkg="dart_veider" type="talker.py" output="screen">
+      <!-- Мапирование топика my_chat_topic к значению аргумента topic_name -->
+      <remap from="my_chat_topic" to="$(arg topic_name)"/>
+    </node>
+  </group>
+</launch>
+
